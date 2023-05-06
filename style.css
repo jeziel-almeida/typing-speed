@@ -80,6 +80,13 @@ body {
     background: #eaeaea;
 }
 
+.history-card {
+    margin-top: 1rem;
+    padding: 1.4rem 1rem;
+    border-radius: 0.4rem;
+    background: #eaeaea;
+}
+
 #text-display {
     margin-bottom: 1rem;
     overflow: hidden;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>typings</title>
+    <title>Typing Speed</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styleMedia.css">
     <link id="theme" rel="stylesheet" href="themes/aurora.css">
@@ -36,6 +36,13 @@
             </div>
         </div>
 
+        
+
+    </div>
+
+    <div id="history-center" class="hidden">
+        <div id="left-wing" onclick="hideHistoryCenter();">< back</div>
+        <div id="history"></div>
     </div>
 
     <div id="theme-center" class="hidden">
@@ -49,6 +56,8 @@
     </div>
 
     <div id="footer">
+        <div id="show-history" class="button" onclick="showHistoryCenter();">history</div>
+        /
         <div id="show-themes" class="button" onclick="showThemeCenter();" tabindex="4">themes</div>
     </div>
 

@@ -3,6 +3,8 @@ const text = document.querySelector("#text-display");
 const input = document.querySelector("#input-field");
 const restart = document.querySelector("#redo-button");
 const result = document.querySelector("#right-wing");
+const history = document.querySelector("#history");
+const header = document.querySelector("#header");
 
 wordsCount = 0
 
@@ -44,10 +46,9 @@ function verify() {
     const startTime = parseInt(localStorage.getItem("startTime"))
     const timeSpent = (finalTime - startTime) / 1000
     const WPM = Math.floor(wordsCount / (timeSpent / 60))
-
     result.textContent = `WPM: ${WPM}`
 
-    //addToHistory(text.textContent, WPM)
+    addToHistory(text.textContent, WPM)
 
     localStorage.setItem("testInCourse", false)
     input.value = ""
@@ -56,6 +57,7 @@ function verify() {
 
 function addToHistory(typedText, WPM) {
     const itemHistory = document.createElement("p")
+    itemHistory.classList.add("history-card")
 
     itemHistory.textContent = `Text "${typedText}" - WPM: ${WPM}`
 
@@ -67,7 +69,7 @@ function restartTest() {
     result.textContent = "WPM: XX"
     newText()
     localStorage.setItem("testInCourse", false)
-    //history.innerHTML = ""
+    history.innerHTML = ""
 }
 
 input.addEventListener("keyup", updateTest)
@@ -76,7 +78,17 @@ restart.addEventListener("click", restartTest)
 newText()
 
 
+function showHistoryCenter() {
+    document.getElementById("history-center").classList.remove("hidden");
+    document.getElementById("command-center").classList.add("hidden");
+    header.textContent = "History"
+}
 
+function hideHistoryCenter() {
+    document.getElementById("history-center").classList.add("hidden");
+    document.getElementById("command-center").classList.remove("hidden");
+    header.textContent = "Typing Speed"
+}
 
 
 function showThemeCenter() {
