@@ -13,54 +13,26 @@
 </head>
 
 <body>
-    <h2 id="header">typings</h2>
+    <h2 id="header">Typing Speed</h2>
 
     <div id="command-center" class>
         <div class="bar">
             <div id="left-wing">
                 <span id="word-count" style="display: inline;">
-                    <span id="wc-10" onclick="setWordCount(10)">10</span>
-                    <text> / </text>
-                    <span id="wc-25" onclick="setWordCount(25)">25</span>
-                    <text> / </text>
-                    <span id="wc-50" onclick="setWordCount(50)">50</span>
-                    <text> / </text>
-                    <span id="wc-100" onclick="setWordCount(100)">100</span>
-                    <text> / </text>
-                    <span id="wc-250" onclick="setWordCount(250)">250</span>
-                </span>
-                <span id="time-count" style="display: none;">
-                    <span id="tc-15" onclick="setTimeCount(15)">15</span>
-                    <text> / </text>
-                    <span id="tc-30" onclick="setTimeCount(30)">30</span>
-                    <text> / </text>
-                    <span id="tc-60" onclick="setTimeCount(60)">60</span>
-                    <text> / </text>
-                    <span id="tc-120" onclick="setTimeCount(120)">120</span>
-                    <text> / </text>
-                    <span id="tc-240" onclick="setTimeCount(240)">240</span>
+                    <span>Type the text below</span>
                 </span>
             </div>
-            <div id="right-wing">WPM: XX / ACC: XX</div>
+            <div id="right-wing">WPM: XX</div>
         </div>
 
         <div id="typing-area">
             <div id="text-display" style="display: block; height: auto;">
-                <span class="highlight">undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
-                <span>undefined </span>
             </div>
+
             <div class="bar">
                 <input type="text" id="input-field" spellcheck="false" autocomplete="off" autocorrect="off"
                     autocapitalize="off" tabindex="1" class>
-                <button id="redo-button" onclick="setText(event)" tabindex="2">redo</button>
+                <button id="redo-button" tabindex="2">restart</button>
             </div>
         </div>
 
@@ -77,8 +49,6 @@
     </div>
 
     <div id="footer">
-        <a href="#">user guide</a>
-         / 
         <div id="show-themes" class="button" onclick="showThemeCenter();" tabindex="4">themes</div>
     </div>
 

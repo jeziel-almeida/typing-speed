@@ -1,92 +1,79 @@
 //Get document element
-const textDisplay = document.querySelector("#text-display");
-const inputField = document.querySelector("#input-field");
+const text = document.querySelector("#text-display");
+const input = document.querySelector("#input-field");
+const restart = document.querySelector("#redo-button");
+const result = document.querySelector("#right-wing");
 
-//Initialize typing mode variables
-let typingMode = 'wordcount';
-let wordCount = 10;
-document.querySelectorAll('#word-count > span').forEach(e => (e.style.borderBottom = ''));
-document.querySelector('#wc-10').style.borderBottom = '2px solid';
+wordsCount = 0
 
-//Initialize dynamic variables
-let wordList = [];
-let randomWords = [];
-let currentWord = 0;
-let correctKeys = 0;
-let timerActive = false;
+const texts = [
+    "When in doubt, go to the library",
+    "I solemnly swear that I am up to no good",
+    "Hogwarts will always be there to welcome you home",
+    "Don't let the muggles get you down",
+    "It does not do to dwell on dreams and forget to live",
+]
 
-setLanguage('portuguese');
-
-function setWordCount(wc) {
-    wordCount = wc;
-    document.querySelectorAll('#word-count > span').forEach(e => (e.style.borderBottom = ''));
-    document.querySelector(`#wc-${wordCount}`).style.borderBottom = '2px solid';
-    setText();
+function newText() {
+    const index = Math.floor(Math.random() * texts.length)
+    textChosen = texts[index]
+    wordsCount = textChosen.split(" ").length
+    text.textContent = textChosen
 }
 
-function setLanguage(_lang) {
-    const lang = _lang.toLowerCase();
-    fetch('texts/random.json')
-        .then(response => response.json())
-        .then(json => {
-            if(typeof json[lang] !== 'undefined') {
-                randomWords = json[lang];
+function updateTest() {
+    start()
 
-                textDisplay.style.direction = "ltr";
-                inputField.style.direction = "ltr";
-
-                setText();
-            } else {
-                console.error(`language ${lang} is undefine`);
-            }
-        })
-        .catch(err => console.error(err));
-}
-
-function setText(e) {
-    e = e || window.event;
-    var keepWordList = e && e.shiftKey;
-
-    //Reset
-    if(!keepWordList) {
-        wordList = [];
+    if (input.value === text.textContent) {
+        verify()
     }
-    currentWord = 0;
-    correctKeys = 0;
-    inputField.value = "";
-    //timerActive = false;
-    //clearTimeout(timer);
-    textDisplay.style.display = 'block';
-    inputField.className = '';
+}
 
-    //switch(typingMode) case 'wordcount':
-    textDisplay.style.height = 'auto';
-    textDisplay.innerHTML = '';
+function start() {
 
-    if(!keepWordList) {
-        wordList = [];
-        while (wordList.length < wordCount) {
-            const randomWord = randomWords[Math.floor(Math.random() * randomWords.length)];
-            if(wordList[wordList.length - 1] !== randomWord || wordList[wordList.length - 1] === undefined) {
-                wordList.push(randomWord);
-            }
-        }
-        
+    const testStatus = JSON.parse(localStorage.getItem("testInCourse")) // transform a string into a boolean
+
+    if (!testStatus) {
+        localStorage.setItem("startTime", new Date().getTime())
+        localStorage.setItem("testInCourse", true)
     }
-
-    showText();
-    //inputField.focus();
 }
 
-function showText() {
-    wordList.forEach(word => {
-        let span = document.createElement('span');
-        span.innerHTML = word + ' ';
-        textDisplay.appendChild(span);
-    });
-    textDisplay.firstChild.classList.add('highlight');
+function verify() {
+    const finalTime = new Date().getTime()
+    const startTime = parseInt(localStorage.getItem("startTime"))
+    const timeSpent = (finalTime - startTime) / 1000
+    const WPM = Math.floor(wordsCount / (timeSpent / 60))
+
+    result.textContent = `WPM: ${WPM}`
+
+    //addToHistory(text.textContent, WPM)
+
+    localStorage.setItem("testInCourse", false)
+    input.value = ""
+    newText()
 }
 
+function addToHistory(typedText, WPM) {
+    const itemHistory = document.createElement("p")
+
+    itemHistory.textContent = `Text "${typedText}" - WPM: ${WPM}`
+
+    history.appendChild(itemHistory)
+}
+
+function restartTest() {
+    input.value = ""
+    result.textContent = "WPM: XX"
+    newText()
+    localStorage.setItem("testInCourse", false)
+    //history.innerHTML = ""
+}
+
+input.addEventListener("keyup", updateTest)
+restart.addEventListener("click", restartTest)
+
+newText()
 
 
 
@@ -117,13 +104,3 @@ async function setTheme(_theme) {
         console.log(erro);
     }
 }
-
-
-
-inputField.addEventListener('keydown', e => {
-    if(e.altKey) {
-        if(e.key === 'l') {
-            setLanguage(inputField.value);
-        }
-    }
-})
