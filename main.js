@@ -49,10 +49,10 @@ const normalTextsEn = [
     "English 7",
     "English 8",
     "English 9",
-    "English 10",
+    "English 10"
 ]
 
-let texts = normalTexts
+let texts = normalTextsEn
 
 function newText() {
     // const index = Math.floor(Math.random() * texts.length)
