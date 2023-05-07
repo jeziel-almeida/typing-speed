@@ -6,7 +6,8 @@ const result = document.querySelector("#right-wing");
 const history = document.querySelector("#history");
 const header = document.querySelector("#header");
 const footer = document.querySelector("#footer");
-
+const commandText = document.querySelector("#command-text");
+const commandResult = document.querySelector(".command-result");
 
 let wordsCount = 0
 let historyBlanked = true
@@ -209,11 +210,13 @@ async function setLanguage(_language) {
         texts = normalTextsPt
         index = 0
         newText()
+        commandText.textContent = "Digite, corretamente, o texto abaixo ↓"
         hideLanguageCenter()
     } else if(language === 'english') {
         texts = normalTextsEn
         index = 0
         newText()
+        commandText.textContent = "Type, correctly, the text below ↓"
         hideLanguageCenter()
     }
 
