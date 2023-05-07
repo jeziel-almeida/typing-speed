@@ -208,10 +208,12 @@ async function setLanguage(_language) {
         texts = normalTextsPt
         index = 0
         newText()
+        hideLanguageCenter()
     } else if(language === 'english') {
         texts = normalTextsEn
         index = 0
         newText()
+        hideLanguageCenter()
     }
 
 }
