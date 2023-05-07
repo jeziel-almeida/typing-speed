@@ -40,16 +40,16 @@ const normalTextsPt = [
 ]
 
 const normalTextsEn = [
-    "English 1",
-    "English 2",
-    "English 3",
-    "English 4",
-    "English 5",
-    "English 6",
-    "English 7",
-    "English 8",
-    "English 9",
-    "English 10"
+    "There can always be healing, even if there is no cure",
+    "What you do is more important than what you say",
+    "It's better to finish something late than to never do it at all",
+    "A journey of a thousand miles begins with a single step",
+    "Anxiety weighs down the heart, but a kind of words cheers it up",
+    "All that is gold does not glitter, not all those who wander are lost",
+    "Still round the corner there may wait a new road or a secret gate",
+    "All we have to decide is what to do with the time that is given us",
+    "There is a wisdom of the head, and a wisdom of the heart",
+    "No one is useless in this world who lightens the burden of it to anyone else"
 ]
 
 let texts = normalTextsEn
