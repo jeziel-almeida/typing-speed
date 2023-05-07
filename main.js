@@ -126,6 +126,7 @@ function restartTest() {
     newText()
     localStorage.setItem("testInCourse", false)
     history.innerHTML = ""
+    text.classList.remove("wrong-phrase", "animate__animated", "animate__shakeX")
 }
 
 input.addEventListener("keyup", updateTest)
