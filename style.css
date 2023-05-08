@@ -37,7 +37,7 @@ body {
     transform: translateY(-2vh);
 }
 
-#theme-area {
+#theme-area, #language-area {
     margin-top: 1rem;
     padding: 1.4rem 1rem;
     border-radius: 0.4rem;
@@ -59,6 +59,14 @@ body {
 
 .theme-button {
     padding: 1rem 0;
+    background: gray;
+    border-radius: 0.4rem;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.language-button {
+    padding: 1rem 1rem;
     background: gray;
     border-radius: 0.4rem;
     text-align: center;

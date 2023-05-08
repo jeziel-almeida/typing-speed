@@ -8,11 +8,12 @@ const header = document.querySelector("#header");
 const footer = document.querySelector("#footer");
 const commandText = document.querySelector("#command-text");
 const commandResult = document.querySelector(".command-result");
+const clockIcon = document.querySelector('#clock-icon')
 
 let wordsCount = 0
 let historyBlanked = true
 let index = 0
-//let currentTheme = ''
+let currentLanguage = 'english'
 
 const textsHogwarts = [
     "When in doubt, go to the library",
@@ -88,6 +89,7 @@ function start() {
     if (!testStatus) {
         localStorage.setItem("startTime", new Date().getTime())
         localStorage.setItem("testInCourse", true)
+        showClock()
     }
 }
 
@@ -98,9 +100,15 @@ function verify() {
     const WPM = Math.floor(wordsCount / (timeSpent / 60))
     result.textContent = `Seconds: ${timeSpent} / WPM: ${WPM}`
 
-    addToHistory(text.textContent, timeSpent, WPM)
+    result.classList.add("animate__animated", "animate__bounceIn")
 
+    setTimeout(function () {
+        result.classList.remove("animate__animated", "animate__bounceIn")
+    }, 1000)
+
+    addToHistory(text.textContent, timeSpent, WPM)
     localStorage.setItem("testInCourse", false)
+    removeClock()
     input.value = ""
     newText()
 }
@@ -132,75 +140,78 @@ function restartTest() {
 
 input.addEventListener("keyup", updateTest)
 restart.addEventListener("click", restartTest)
+localStorage.setItem("testInCourse", false)
 
 newText()
 
+function showClock() {
+    document.getElementById("command-container").classList.add("hidden")
+    clockIcon.classList.remove("hidden")
+}
+
+function removeClock() {
+    document.getElementById("command-container").classList.remove("hidden")
+    clockIcon.classList.add("hidden")
+}
+
+function commandTextEnglish() {
+    commandText.textContent = "Type the text below correctly ↓"
+}
+
+function commandTextPortuguese() {
+    commandText.textContent = "Digite o texto abaixo corretamente ↓"
+}
+
+function addAnimationBackInDown(element) {
+    element.classList.add("animate__animated", "animate__backInDown", "animate__faster")
+}
+
+function removeAnimationBackInDown(element) {
+    setTimeout(function () {
+        element.classList.remove("animate__animated", "animate__backInDown", "animate__faster")
+    }, 1000)
+}
+
+function showScreen(screenId, screenName) {
+    footer.classList.add("hidden")
+    document.getElementById(screenId).classList.remove("hidden");
+    document.getElementById("command-center").classList.add("hidden");
+    header.textContent = screenName
+    addAnimationBackInDown(header)
+    removeAnimationBackInDown(header)
+}
+
+function hideScreen(screen) {
+    footer.classList.remove("hidden")
+    document.getElementById(screen).classList.add("hidden");
+    document.getElementById("command-center").classList.remove("hidden");
+    header.textContent = "Typing Speed"
+    addAnimationBackInDown(header)
+    removeAnimationBackInDown(header)
+}
 
 function showHistoryCenter() {
-    footer.classList.add("hidden")
-    document.getElementById("history-center").classList.remove("hidden");
-    document.getElementById("command-center").classList.add("hidden");
-    header.textContent = "History"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    showScreen("history-center", "History")
 }
 
 function hideHistoryCenter() {
-    footer.classList.remove("hidden")
-    document.getElementById("history-center").classList.add("hidden");
-    document.getElementById("command-center").classList.remove("hidden");
-    header.textContent = "Typing Speed"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    hideScreen("history-center")
 }
 
-
 function showThemeCenter() {
-    footer.classList.add("hidden")
-    document.getElementById("theme-center").classList.remove("hidden");
-    document.getElementById("command-center").classList.add("hidden");
-    header.textContent = "Themes"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    showScreen("theme-center", "Themes")
 }
 
 function hideThemeCenter() {
-    footer.classList.remove("hidden")
-    document.getElementById("theme-center").classList.add("hidden");
-    document.getElementById("command-center").classList.remove("hidden");
-    header.textContent = "Typing Speed"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    hideScreen("theme-center")
 }
 
 function showLanguageCenter() {
-    footer.classList.add("hidden")
-    document.getElementById("language-center").classList.remove("hidden");
-    document.getElementById("command-center").classList.add("hidden");
-    header.textContent = "Language"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    showScreen("language-center", "Language")
 }
 
 function hideLanguageCenter() {
-    footer.classList.remove("hidden")
-    document.getElementById("language-center").classList.add("hidden");
-    document.getElementById("command-center").classList.remove("hidden");
-    header.textContent = "Typing Speed"
-    header.classList.add("animate__animated", "animate__backInDown")
-    setTimeout(function () {
-        header.classList.remove("animate__animated", "animate__backInDown")
-    }, 1000)
+    hideScreen("language-center")
 }
 
 async function setLanguage(_language) {
@@ -209,14 +220,16 @@ async function setLanguage(_language) {
     if(language === 'portuguese') {
         texts = normalTextsPt
         index = 0
+        currentLanguage = 'portuguese'
         newText()
-        commandText.textContent = "Digite, corretamente, o texto abaixo ↓"
+        commandTextPortuguese()
         hideLanguageCenter()
     } else if(language === 'english') {
         texts = normalTextsEn
         index = 0
+        currentLanguage = 'english'
         newText()
-        commandText.textContent = "Type, correctly, the text below ↓"
+        commandTextEnglish()
         hideLanguageCenter()
     }
 
@@ -228,14 +241,22 @@ async function setTheme(_theme) {
     if(theme === 'hogwarts') {
         texts = textsHogwarts
         index = 0
+        commandTextEnglish()
         newText()
     } else {
-        texts = normalTexts
+        if(currentLanguage === 'english') {
+            texts = normalTextsEn
+        } else if(currentLanguage === 'portuguese') {
+            texts = normalTextsPt
+        }
         index = 0
         newText()
     }
 
+    changeClockColor(theme)
+
     try {
+    
         const resultado = await fetch(`themes/${theme}.css`);
         if(resultado.ok) {
             document.querySelector('#theme').setAttribute('href', `themes/${theme}.css`);
@@ -245,5 +266,24 @@ async function setTheme(_theme) {
     
     } catch(erro) {
         console.log(erro);
+    }
+}
+
+function changeClockColor(theme) {
+    switch (theme) {
+        case 'light':
+            clockIcon.setAttribute('colors', 'primary:#000000')
+            break
+        case 'aurora':
+            clockIcon.setAttribute('colors', 'primary:#ffffff')
+            break
+        case 'hogwarts':
+            clockIcon.setAttribute('colors', 'primary:#ffffff')
+            break
+        case 'yuri':
+            clockIcon.setAttribute('colors', 'primary:#e83a30')
+            break
+        default:
+            clockIcon.setAttribute('colors', 'primary:#000000')
     }
 }
