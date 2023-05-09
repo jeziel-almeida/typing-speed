@@ -14,11 +14,11 @@ body {
   color: #1a1a1a;
 }
 
-#typing-area, #theme-area, .history-card, #language-area {
+#typing-area, #theme-area, .history-card, #language-area, #show-history, #show-themes, #show-language {
   background: #eaeaea;
 }
 
-#text-display {
+#text-display, #show-history, #show-themes, #show-language {
   color: #1a1a1a;
 }
 
@@ -37,6 +37,11 @@ body {
 }
 
 #footer {
+  color: #1a1a1a;
+}
+
+.footer-info {
+  background: #eaeaea;
   color: #1a1a1a;
 }
 

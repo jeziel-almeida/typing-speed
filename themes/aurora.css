@@ -28,12 +28,12 @@ body {
   color: #fafafa;
 }
 
-#typing-area, #theme-area, .history-card, #language-area {
+#typing-area, #theme-area, .history-card, #language-area, #show-history, #show-themes, #show-language {
   background: rgba(250, 250, 250, 0.6);
   backdrop-filter: blur(1rem);
 }
 
-#text-display {
+#text-display, #show-history, #show-themes, #show-language {
   color: #1a1a1a;
 }
 
@@ -53,6 +53,12 @@ body {
 
 #footer {
   color: #fafafa;
+}
+
+.footer-info {
+  background: rgba(250, 250, 250, 0.6);
+  backdrop-filter: blur(1rem);
+  color: #1a1a1a;
 }
 
 .highlight {

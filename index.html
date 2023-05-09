@@ -52,7 +52,17 @@
     </div>
 
     <div id="history-center" class="hidden">
-        <div id="left-wing" onclick="hideHistoryCenter();">< back</div>
+        <div id="left-wing" class="hide-screen" onclick="hideHistoryCenter();">
+            <lord-icon
+                src="https://cdn.lordicon.com/nhfyhmlt.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                state="hover-3"
+                style="width:25px;height:25px"
+                class="close-icon">
+            </lord-icon>    
+            close
+        </div>
         <div id="history" class="hidden">
             
         </div>
@@ -63,7 +73,17 @@
     </div>
 
     <div id="theme-center" class="hidden">
-        <div id="left-wing" onclick="hideThemeCenter();">< back</div>
+        <div id="left-wing" class="hide-screen" onclick="hideThemeCenter();">
+            <lord-icon
+                src="https://cdn.lordicon.com/nhfyhmlt.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                state="hover-3"
+                style="width:25px;height:25px"
+                class="close-icon">
+            </lord-icon>    
+            close
+        </div>
         <div id="theme-area">
             <div class="theme-button" onclick="setTheme('yuri');" id="yuri" tabindex="10" style="background: rgb(41, 54, 73); color: rgb(234, 66, 33);">yuri</div>
             <div class="theme-button" onclick="setTheme('light');" id="light" tabindex="11" style="background: rgb(250, 250, 250); color: rgb(26, 26, 26);">light</div>
@@ -73,7 +93,17 @@
     </div>
 
     <div id="language-center" class="hidden">
-        <div id="left-wing" onclick="hideLanguageCenter();">< back</div>
+        <div id="left-wing" class="hide-screen" onclick="hideLanguageCenter();">
+            <lord-icon
+                src="https://cdn.lordicon.com/nhfyhmlt.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                state="hover-3"
+                style="width:25px;height:25px"
+                class="close-icon">
+            </lord-icon>    
+            close
+        </div>
         <div id="language-area">
             <div class="language-button" onclick="setLanguage('english');" style="background: rgb(250, 250, 250); color: rgb(26, 26, 26);">English</div>
             <div class="language-button" onclick="setLanguage('portuguese');" style="background: rgb(250, 250, 250); color: rgb(26, 26, 26);">Portuguese</div>
@@ -81,16 +111,19 @@
     </div>
 
     <div id="footer">
-        <div id="show-history" class="button" onclick="showHistoryCenter();">history</div>
-        /
-        <div id="show-themes" class="button" onclick="showThemeCenter();" tabindex="4">themes</div>
-        /
-        <div id="show-language" class="button" onclick="showLanguageCenter();">language</div>
+        <button id="show-history" class="button" onclick="showHistoryCenter();">history</button>
+        
+        <button id="show-themes" class="button" onclick="showThemeCenter();" tabindex="4">themes</button>
+        
+        <button id="show-language" class="button" onclick="showLanguageCenter();">language</button>
 
     </div>
     
     
-    <a href="https://lordicon.com/" style="font-size:10px;">Icons by Lordicon.com</a>
+    <div class="footer-info">
+        <p>Developed by <a href="https://github.com/jeziel-almeida" target="_blank">Jeziel Almeida</a> &copy; All rights reserved</p>
+        <a href="https://lordicon.com/" target="_blank" style="font-size:14px;">Icons by Lordicon.com</a>
+    </div>
     
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
     <script src="main.js"></script>

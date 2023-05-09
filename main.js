@@ -9,6 +9,7 @@ const footer = document.querySelector("#footer");
 const commandText = document.querySelector("#command-text");
 const commandResult = document.querySelector(".command-result");
 const clockIcon = document.querySelector('#clock-icon')
+const closeIcon = document.querySelectorAll('.close-icon')
 
 let wordsCount = 0
 let historyBlanked = true
@@ -249,17 +250,32 @@ function changeClockColor(theme) {
     switch (theme) {
         case 'light':
             clockIcon.setAttribute('colors', 'primary:#000000')
+            closeIcon.forEach((element) => {
+                element.setAttribute('colors', 'primary:#000000')
+            })
             break
         case 'aurora':
             clockIcon.setAttribute('colors', 'primary:#ffffff')
+            closeIcon.forEach((element) => {
+                element.setAttribute('colors', 'primary:#ffffff')
+            })
             break
         case 'hogwarts':
             clockIcon.setAttribute('colors', 'primary:#ffffff')
+            closeIcon.forEach((element) => {
+                element.setAttribute('colors', 'primary:#ffffff')
+            })
             break
         case 'yuri':
             clockIcon.setAttribute('colors', 'primary:#e83a30')
+            closeIcon.forEach((element) => {
+                element.setAttribute('colors', 'primary:#e83a30')
+            })
             break
         default:
             clockIcon.setAttribute('colors', 'primary:#000000')
+            closeIcon.forEach((element) => {
+                element.setAttribute('colors', 'primary:#000000')
+            })
     }
 }
